@@ -20,12 +20,12 @@ app.use('/graphql', graphqlHTTP({
     schema: schema
 }));
 
+//connect to db
+mongoose.connect('mongodb://' + process.env.HOST + '/' + process.env.DATABSE, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('DB Connected'))
+    .catch(err => console.log(err));
+
 //starting the server
 app.listen(app.get('port'), () => {
     console.log('Server on port: ' + app.get('port'));
-
-    //connect to db
-    mongoose.connect('mongodb://' + process.env.HOST + '/' + process.env.DATABSE, { useNewUrlParser: true, useUnifiedTopology: true })
-        .then(() => console.log('DB Connected'))
-        .catch(err => console.log(err));
 });
